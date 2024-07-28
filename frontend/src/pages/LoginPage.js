@@ -4,7 +4,6 @@ import { useDispatch } from "react-redux";
 import {  useNavigate } from "react-router-dom";
 
 
-import { setUsername } from '../store/actions/setUsername';
 import { setSessionUUID } from '../store/actions/setSessionUUID';
 
 function LoginPage(props) {
@@ -26,13 +25,13 @@ function LoginPage(props) {
         .post("http://localhost:8081/api/auth", {
             "username": username,
             "password": password
+        }, {
+            withCredentials: true
         })
         .then(response => {
             if (response.data.authorized === 'true') {
-                console.log(response.data);
-                dispatch(setSessionUUID(response.data.sessiondata.sessionUUID));
-                dispatch(setUsername(response.data.sessiondata.username));
-                navigate('/home');
+                dispatch(setSessionUUID(response.data.sessionUUID));
+                navigate('/home', {replace: true});
             }
         })
         .catch(error => console.log(error))

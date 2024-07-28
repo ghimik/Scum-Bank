@@ -12,6 +12,11 @@ const dataReducer = (state = initialState, action) => {
                 ...state, 
                 sessionUUID: action.payload
             }
+        case 'SET_BALANCE':
+            return {
+                ...state, 
+                balance: action.payload
+            }
         default:
             return state
     }

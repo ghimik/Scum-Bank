@@ -11,10 +11,12 @@ public class Transaction {
     @SequenceGenerator(name = "transaction_id_seq", sequenceName = "transaction_id_seq", allocationSize = 1)
     private Long id;
 
-    @Column(name = "senderid")
-    private Long senderId;
+    @ManyToOne
+    @JoinColumn(name = "senderid")
+    private Account sender;
 
-    @Column(name = "receiverid")
-    private Long recieverId;
+    @ManyToOne
+    @JoinColumn(name = "receiverid")
+    private Account reciever;
 
 }

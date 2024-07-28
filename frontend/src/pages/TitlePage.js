@@ -6,8 +6,8 @@ function TitlePage() {
 
     return (
         <div>
-            <button onClick={() => navigate('register')}>Sign up</button>
-            <button onClick={() => navigate('login')}>Log in</button>
+            <button onClick={() => navigate('register', {replace: true})}>Sign up</button>
+            <button onClick={() => navigate('login', {replace: true})}>Log in</button>
         </div>
     )
 }

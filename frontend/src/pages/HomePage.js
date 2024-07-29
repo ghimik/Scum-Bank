@@ -16,16 +16,17 @@ function HomePage() {
                 params: {UUID: uuid},
                 withCredentials: true
             })
-                 .then(response => {
+            .then(response => {
                      dispatch(setUsername(response.data.username));
                      dispatch(setBalance(response.data.balance));
-                 })
-                 .catch(error => console.log(error));
+            })
+            .catch(error => console.log(error));
         }
     }, [uuid, dispatch]);
 
     const username = useSelector((state) => state.username); 
-    return <p>text: {username}</p>
+    const balance = useSelector((state) => state.balance)
+    return <p>text: {username}, you have {balance}</p>
 }
 
 export default HomePage;

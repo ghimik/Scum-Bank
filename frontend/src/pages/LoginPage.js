@@ -1,48 +1,57 @@
-import axios from "axios";
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import {  useNavigate } from "react-router-dom";
-
-
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import { setSessionUUID } from '../store/actions/setSessionUUID';
+import Header from '../components/Header';
+import Footer from '../components/Footer';
+import FormInput from '../components/FormInput';
+import '../styles/LoginPage.css';
 
-function LoginPage(props) {
-    const [username, setLocalUsername] = useState('');
+function LoginPage() {
+    const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
     const dispatch = useDispatch();
     
-    const handleNameInput = (e) => {
-        setLocalUsername(e.target.value);
-    }
-
-    const handlePasswordInput = (e) => {
-        setPassword(e.target.value)
-    }
-
     const handleVerification = () => {
-        axios
-        .post("http://localhost:8081/api/auth", {
-            "username": username,
-            "password": password
+        axios.post('http://localhost:8081/api/auth', {
+            username,
+            password,
         }, {
-            withCredentials: true
+            withCredentials: true,
         })
         .then(response => {
             if (response.data.authorized === 'true') {
                 dispatch(setSessionUUID(response.data.sessionUUID));
-                navigate('/home', {replace: true});
+                navigate('/home');
             }
         })
-        .catch(error => console.log(error))
-    }
+        .catch(error => console.error(error));
+    };
+
     return (
-    <div>
-        <h1>name: </h1><input value={username} onChange={handleNameInput} type="text" />
-        <h1>password: </h1><input value={password} onChange={handlePasswordInput} type="password" />
-        <button onClick={handleVerification}>verificate</button>
-    </div>
-    )
+        <div className="login-page-container">
+            <Header />
+            <main className="login-page-main">
+                <h2>Login</h2>
+                <FormInput 
+                    label="Username" 
+                    type="text" 
+                    value={username} 
+                    onChange={(e) => setUsername(e.target.value)} 
+                />
+                <FormInput 
+                    label="Password" 
+                    type="password" 
+                    value={password} 
+                    onChange={(e) => setPassword(e.target.value)} 
+                />
+                <button className="login-button" onClick={handleVerification}>Login</button>
+            </main>
+            <Footer />
+        </div>
+    );
 }
 
-export default LoginPage
+export default LoginPage;

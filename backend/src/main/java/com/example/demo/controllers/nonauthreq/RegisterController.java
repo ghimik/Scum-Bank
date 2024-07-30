@@ -1,4 +1,4 @@
-package com.example.demo.controllers;
+package com.example.demo.controllers.nonauthreq;
 
 import com.example.demo.dtos.UserRequestDTO;
 import com.example.demo.services.UserRegistrationServiceImpl;

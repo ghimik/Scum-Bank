@@ -15,6 +15,25 @@ public class UserParamsManagmentService {
 
     private Long userid;
 
+    public Boolean isValidUUID(UUID other) {
+        return this.sessionUUID != null && sessionUUID.equals(other);
+    }
+
+    public Boolean closeSession(String sessionUUID) {
+        if (this.isValidUUID(sessionUUID)) {
+            this.sessionUUID = null;
+            this.userid = null;
+            return true;
+        }
+        return false;
+    }
+
+    public Boolean isValidUUID(String other) {
+        return this.sessionUUID != null &&sessionUUID.toString().equals(other);
+    }
+
+
+
     public UUID getSessionUUID() {
         return sessionUUID;
     }
@@ -29,14 +48,6 @@ public class UserParamsManagmentService {
 
     public void setUserid(Long userid) {
         this.userid = userid;
-    }
-
-    public Boolean isValidUUID(UUID other) {
-        return this.sessionUUID != null && sessionUUID.equals(other);
-    }
-
-    public Boolean isValidUUID(String other) {
-        return this.sessionUUID != null &&sessionUUID.toString().equals(other);
     }
 
 

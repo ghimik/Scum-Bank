@@ -11,6 +11,7 @@ import '../styles/LoginPage.css';
 function LoginPage() {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const [errorMessage, setErrorMessage] = useState('');
     const navigate = useNavigate();
     const dispatch = useDispatch();
     
@@ -25,9 +26,14 @@ function LoginPage() {
             if (response.data.authorized === 'true') {
                 dispatch(setSessionUUID(response.data.sessionUUID));
                 navigate('/home');
+            } else {
+                setErrorMessage('Authorization failed: Incorrect username or password.');
             }
         })
-        .catch(error => console.error(error));
+        .catch(error => {
+            console.error(error);
+            setErrorMessage('An error occurred during login. Please try again later.');
+        });
     };
 
     return (
@@ -36,6 +42,7 @@ function LoginPage() {
             <div className="login-page-main">
                 <h2>Login</h2>
                 <div className="login-form-container">
+                    {errorMessage && <div className="error-message">{errorMessage}</div>}
                     <FormInput 
                         label="Username" 
                         name="username"

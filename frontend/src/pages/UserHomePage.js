@@ -11,11 +11,12 @@ import { setBalance } from "../store/actions/setBalance";
 import { setUsername} from "../store/actions/setUsername";
 
 import '../styles/UserHomePage.css';
+import UnauthorizedPage from './UnauthorizedPage';
 
 function UserHomePage() {
     const uuid = useSelector((state) => state.sessionUUID);
     const dispatch = useDispatch();
-    const url = "http://localhost:8081/api/generalinfo?UUID="+uuid;
+    const url = "http://localhost:8081/api/generalinfo?sessionUUID="+uuid;
     console.log("url: " + url);
     useEffect(() => {
         if (uuid) {  
@@ -25,8 +26,8 @@ function UserHomePage() {
                 withCredentials: true
             })
             .then(response => {
-                     dispatch(setUsername(response.data.username));
-                     dispatch(setBalance(response.data.balance));
+                dispatch(setUsername(response.data.username));
+                dispatch(setBalance(response.data.balance));
             })
             .catch(error => console.log(error));
         }
@@ -35,8 +36,10 @@ function UserHomePage() {
     const userName = useSelector((state) => state.username); 
     const userBalance = useSelector((state) => state.balance);
 
-    console.log(userName + " " + userBalance)
 
+    if (!uuid) {
+        return <UnauthorizedPage />;
+    }
     return (
         <div className="user-home-page">
             <Header/>

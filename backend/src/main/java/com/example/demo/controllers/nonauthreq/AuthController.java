@@ -1,4 +1,4 @@
-package com.example.demo.controllers;
+package com.example.demo.controllers.nonauthreq;
 
 import com.example.demo.dtos.UserRequestDTO;
 import com.example.demo.services.UserParamsManagmentService;
@@ -35,6 +35,7 @@ public class AuthController {
             var uuid = UUID.randomUUID();
 
             userParams.setSessionUUID(uuid);
+
             userParams.setUserid(account.getId());
             body.put("authorized", "true");
             body.put("sessionUUID", uuid.toString());
@@ -46,6 +47,14 @@ public class AuthController {
         }
 
         return response;
+    }
+
+    @GetMapping("/unauth")
+    public ResponseEntity unauthorize(@RequestParam String sessionUUID) {
+        if (userParams.closeSession(sessionUUID)) {
+            return ResponseEntity.ok().body("");
+        }
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("");
     }
 
 }

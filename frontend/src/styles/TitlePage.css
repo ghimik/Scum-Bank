@@ -1,14 +1,28 @@
+
 .title-page-container {
     display: flex;
     flex-direction: column;
-    align-items: center;
     min-height: 100vh;
     font-family: Arial, sans-serif;
-    text-align: center;
     background-color: #f9f9f9;
 }
 
-.title-page-main {
+.content-container {
+    display: flex;
+    flex: 1;
+}
+
+.sidebar {
+    width: 250px;
+    padding: 20px;
+    background-color: #f0f0f0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.main-content {
     flex: 1;
     padding: 20px;
     display: flex;
@@ -17,12 +31,66 @@
     justify-content: center;
 }
 
-.button-container {
-    margin-bottom: 20px;
+.profile-sidebar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
 }
 
-.button-container button {
-    margin: 10px;
+.profile-avatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin-bottom: 15px;
+}
+
+.profile-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.profile-info h3 {
+    margin: 0;
+    font-size: 1.2rem;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.profile-button,
+.logout-button {
+    margin-top: 5px;
+    padding: 10px 20px;
+    font-size: 0.9rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    color: white;
+    transition: background-color 0.3s;
+    width: 80%;
+    margin-bottom: 10px;
+}
+
+.profile-button {
+    background-color: #007bff;
+}
+
+.profile-button:hover {
+    background-color: #0056b3;
+}
+
+.logout-button {
+    background-color: #dc3545;
+}
+
+.logout-button:hover {
+    background-color: #c82333;
+}
+
+.auth-buttons button {
+    width: 100%;
+    margin: 10px 0;
     padding: 10px 20px;
     font-size: 1rem;
     border: none;
@@ -33,31 +101,22 @@
     transition: background-color 0.3s;
 }
 
-.button-container button:hover {
+.auth-buttons button:hover {
     background-color: #0056b3;
 }
 
 .news-slides {
-    border: 1px dashed #ccc;
-    padding: 20px;
-    border-radius: 10px;
-    max-width: 600px;
-    width: 100%;
-    margin: 20px 0;
+    display: flex;
 }
 
 .news-slide {
-    margin: 10px 0;
+    width: 80%;
+    height: 100%;
+    max-width: 800px;
+    min-width: 200px;
+    padding: 20px;
+    margin: 1%;
+    border: 1px dashed #ccc;
+    border-radius: 10px;
+    background-color: #fff;
 }
-
-.news-slide h2 {
-    margin: 0;
-    font-size: 1.5rem;
-    color: #333;
-}
-
-.news-slide p {
-    font-size: 1rem;
-    color: #555;
-}
-

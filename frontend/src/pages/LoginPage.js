@@ -33,22 +33,26 @@ function LoginPage() {
     return (
         <div className="login-page-container">
             <Header />
-            <main className="login-page-main">
+            <div className="login-page-main">
                 <h2>Login</h2>
-                <FormInput 
-                    label="Username" 
-                    type="text" 
-                    value={username} 
-                    onChange={(e) => setUsername(e.target.value)} 
-                />
-                <FormInput 
-                    label="Password" 
-                    type="password" 
-                    value={password} 
-                    onChange={(e) => setPassword(e.target.value)} 
-                />
-                <button className="login-button" onClick={handleVerification}>Login</button>
-            </main>
+                <div className="login-form-container">
+                    <FormInput 
+                        label="Username" 
+                        name="username"
+                        type="text" 
+                        value={username} 
+                        onChange={(e) => setUsername(e.target.value)} 
+                    />
+                    <FormInput 
+                        label="Password" 
+                        name="password"
+                        type="password" 
+                        value={password} 
+                        onChange={(e) => setPassword(e.target.value)} 
+                    />
+                    <button className="login-button" onClick={handleVerification}>Login</button>
+                </div>
+            </div>
             <Footer />
         </div>
     );

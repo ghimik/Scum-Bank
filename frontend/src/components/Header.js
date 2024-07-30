@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import "../styles/TitlePage.css"
+import "../styles/Header.css"
 
 function Header({visibleButton = true}) {
     const navigate = useNavigate();

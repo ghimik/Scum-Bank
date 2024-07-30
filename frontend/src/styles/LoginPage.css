@@ -4,6 +4,7 @@
     min-height: 100vh;
     font-family: Arial, sans-serif;
     background-color: #f9f9f9;
+    width: 100%;
 }
 
 .login-page-main {
@@ -12,12 +13,21 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 20px;
+    padding: 1%;
+    width: 98%;
 }
 
 .login-page-main h2 {
     margin-bottom: 20px;
     color: #333;
+}
+
+.login-form-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 400px; /* Ограничиваем максимальную ширину */
 }
 
 .login-button {

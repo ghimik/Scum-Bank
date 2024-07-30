@@ -1,10 +1,18 @@
-import axios from "axios";
-import React, { useEffect } from "react";
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from "react-redux";
+import axios from 'axios';
+
+import Header from '../components/Header';
+import Footer from '../components/Footer';
+import UserSidebar from '../components/userhomepage/UserSidebar';
+import MainContent from '../components/userhomepage/MainContent';
+
 import { setBalance } from "../store/actions/setBalance";
 import { setUsername} from "../store/actions/setUsername";
 
-function HomePage() {
+import '../styles/UserHomePage.css';
+
+function UserHomePage() {
     const uuid = useSelector((state) => state.sessionUUID);
     const dispatch = useDispatch();
     const url = "http://localhost:8081/api/generalinfo?UUID="+uuid;
@@ -24,9 +32,21 @@ function HomePage() {
         }
     }, [uuid, dispatch]);
 
-    const username = useSelector((state) => state.username); 
-    const balance = useSelector((state) => state.balance)
-    return <p>text: {username}, you have {balance}</p>
+    const userName = useSelector((state) => state.username); 
+    const userBalance = useSelector((state) => state.balance);
+
+    console.log(userName + " " + userBalance)
+
+    return (
+        <div className="user-home-page">
+            <Header/>
+            <div className="user-home-content">
+                <UserSidebar username={userName} balance={userBalance} />
+                <MainContent />
+            </div>
+            <Footer />
+        </div>
+    );
 }
 
-export default HomePage;
+export default UserHomePage;

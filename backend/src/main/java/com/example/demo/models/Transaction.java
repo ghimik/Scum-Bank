@@ -2,6 +2,9 @@ package com.example.demo.models;
 
 import jakarta.persistence.*;
 
+import java.math.BigDecimal;
+import java.sql.Timestamp;
+
 @Entity
 @Table(name = "transaction")
 public class Transaction {
@@ -18,6 +21,12 @@ public class Transaction {
     @ManyToOne
     @JoinColumn(name = "receiverid")
     private Account reciever;
+
+    @Column(name = "value")
+    private BigDecimal value;
+
+    @Column(name = "date")
+    private Timestamp timestamp;
 
     public Long getId() {
         return id;
@@ -41,5 +50,21 @@ public class Transaction {
 
     public void setReciever(Account reciever) {
         this.reciever = reciever;
+    }
+
+    public Timestamp getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(Timestamp timestamp) {
+        this.timestamp = timestamp;
+    }
+
+    public BigDecimal getValue() {
+        return value;
+    }
+
+    public void setValue(BigDecimal value) {
+        this.value = value;
     }
 }

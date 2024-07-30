@@ -22,7 +22,7 @@ function UserHomePage() {
         if (uuid) {  
             const url = `http://localhost:8081/api/generalinfo`;
             axios.get(url, {
-                params: {UUID: uuid},
+                params: {sessionUUID: uuid},
                 withCredentials: true
             })
             .then(response => {

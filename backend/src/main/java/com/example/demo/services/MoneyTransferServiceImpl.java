@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.sql.Timestamp;
+import java.time.Instant;
 
 @Service
 public class MoneyTransferServiceImpl implements MoneyTransferService{
@@ -36,6 +38,7 @@ public class MoneyTransferServiceImpl implements MoneyTransferService{
         Transaction transaction = new Transaction();
         transaction.setReciever(receiverAccount);
         transaction.setSender(senderAccount);
+        transaction.setTimestamp(Timestamp.from(Instant.now()));
 
         bankAccountRepository.addMoney(reciever.getId(), amount);
         bankAccountRepository.annigilateMoney(sender.getId(), amount);

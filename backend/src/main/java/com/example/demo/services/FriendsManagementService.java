@@ -8,4 +8,7 @@ public interface FriendsManagementService {
 
     List<AccountProjection> getAllFriends(Long id);
 
+    void befriend(Long initiatorId, Long recieverId);
+
+    void befriend(Long initiatorId, String receiverName);
 }

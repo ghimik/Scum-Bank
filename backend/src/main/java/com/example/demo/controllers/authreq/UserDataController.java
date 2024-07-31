@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.HttpStatusCodeException;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -35,6 +36,16 @@ public class UserDataController implements UUIDValidationRequiredController {
         var balance = accountDataControllingService.getUserBalance(userId);
 
         return ResponseEntity.ok().body(new GeneralUserInformationDTO(username, balance));
+    }
+
+    @GetMapping("/balance")
+    public ResponseEntity<BigDecimal> getBalance(@RequestParam String sessionUUID) {
+        validateUUID(userParams, sessionUUID);
+
+        var userId = userParams.getUserid();
+        var balance = accountDataControllingService.getUserBalance(userId);
+
+        return ResponseEntity.ok().body(balance);
     }
 
     @GetMapping("/transactions")

@@ -5,33 +5,38 @@ import com.example.demo.services.MoneyTransferService;
 import com.example.demo.services.UserParamsManagmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
+import java.util.HashMap;
 
-@RestController("/api")
+@RestController
+@RequestMapping("/api")
 public class TransactionController implements UUIDValidationRequiredController {
 
     @Autowired
-    private UserParamsManagmentService userParamsManagmentService;
+    private UserParamsManagmentService userParams;
 
     @Autowired
     private MoneyTransferService moneyTransferService;
 
     @PostMapping("/transferMoney")
     public ResponseEntity transferMoney(@RequestParam String sessionUUID, @RequestBody MoneyTransferDTO dto) {
-        validateUUID(userParamsManagmentService, sessionUUID);
+        validateUUID(userParams, sessionUUID);
+        var body = new HashMap<String, Object>();
 
-        Long senderId = userParamsManagmentService.getUserid();
+        Long senderId = userParams.getUserid();
         String receiverName = dto.getReceiverName();
         BigDecimal amount = dto.getAmount();
-
-        moneyTransferService.transferMoney(senderId, receiverName, amount);
-
-        return ResponseEntity.ok().body("");
+        try {
+            moneyTransferService.transferMoney(senderId, receiverName, amount);
+        } catch (Exception e) {
+            body.put("success", "false");
+            body.put("error", e.getMessage());
+            return ResponseEntity.badRequest().body(body);
+        }
+        body.put("success", "true");
+        return ResponseEntity.ok().body(body);
 
     }
 

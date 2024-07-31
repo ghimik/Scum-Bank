@@ -1,6 +1,13 @@
 .friends-block {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
     background-color: white;
     padding: 15px;
     border-radius: 5px;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.friends-block * {
+    min-width: 80%;
 }

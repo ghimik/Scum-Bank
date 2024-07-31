@@ -1,11 +1,24 @@
 import React from 'react';
 import '../../styles/FriendsBlock.css';
 
-function FriendsBlock() {
+function FriendsBlock({ friendsList }) {
     return (
         <section className="friends-block">
             <h3>Friends</h3>
-            <p>No friends found.</p>
+            {friendsList.length === 0 ? (
+                <p>No friends found.</p>
+            ) : (
+                <div className="friends-list">
+                    {friendsList.map((friend, index) => (
+                        <div key={index} className="friend-card">
+                            <img src="/path/to/default-avatar.jpg" alt="Avatar" className="friend-avatar" />
+                            <div className="friend-info">
+                                <h4>{friend.username}</h4>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            )}
         </section>
     );
 }

@@ -54,7 +54,7 @@ public class MoneyTransferServiceImpl implements MoneyTransferService{
 
         Account receiverAccount = accountRepository.findByUsername(receiverName);
         BankAccount reciever = receiverAccount.getBankAccount();
-        
+
         if (friendsManagementService.areFriends(senderAccount, receiverAccount))
             scaled = scaled.multiply(BigDecimal.ONE.subtract(FRIENDS_MONEY_TRANSFER_COMISSION));
 

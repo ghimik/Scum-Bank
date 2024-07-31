@@ -1,5 +1,6 @@
 package com.example.demo.controllers.authreq;
 
+import com.example.demo.dtos.FriendshipRequestDTO;
 import com.example.demo.services.FriendsManagementService;
 import com.example.demo.services.UserParamsManagementService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,9 +19,9 @@ public class FriendshipController implements UUIDValidationRequiredController {
 
     @PostMapping("/befriend")
     public ResponseEntity befriend(@RequestParam String sessionUUID,
-                                   @RequestBody String friendName) {
+                                   @RequestBody FriendshipRequestDTO friendName) {
         validateUUID(userParams, sessionUUID);
-        friendsManagementService.befriend(userParams.getUserid(), friendName);
+        friendsManagementService.befriend(userParams.getUserid(), friendName.getFriendName());
         return ResponseEntity.ok().body("");
     }
 }

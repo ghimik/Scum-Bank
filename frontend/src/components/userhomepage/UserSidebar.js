@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import {setUsername } from "../../store/actions/setUsername"
 import {setBalance} from "../../store/actions/setBalance"
 import axios from 'axios';
+import AddFriendModal from '../AddFriendModal';
 
 function refreshBalance(uuid, dispatch) {
     const url = `http://localhost:8081/api/balance`;
@@ -20,8 +21,12 @@ function refreshBalance(uuid, dispatch) {
 }
 
 
-function UserSidebar(props) {
+function UserSidebar({onFriendAdded}) {
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isAddFriendModalOpen, setAddFriendModalOpen] = useState(false);
+
+    const openAddFriendModal = () => setAddFriendModalOpen(true);
+    const closeAddFriendModal = () => setAddFriendModalOpen(false);
 
     const balance = useSelector((state) => state.balance);
     const uuid = useSelector((state) => state.sessionUUID);
@@ -53,13 +58,15 @@ function UserSidebar(props) {
                 <h2>{userName}</h2>
                 <p>Balance: {userBalance} тугриков</p>
                 <button onClick={() => setIsModalOpen(!isModalOpen)}>Transfer Money</button>
-                <button>Add Friend</button>
+                <button onClick={openAddFriendModal}>Add Friend</button>
                 <TransferMoneyModal 
                     isOpen={isModalOpen} 
                     onClose={() => setIsModalOpen(false)}
                     onTransfer={() => refreshBalance(uuid, dispatch)}
                 />
             </div>
+            <AddFriendModal onFriendAdded={onFriendAdded} isOpen={isAddFriendModalOpen} onClose={closeAddFriendModal} />
+
             <LogoutButton/>
             
         </aside>

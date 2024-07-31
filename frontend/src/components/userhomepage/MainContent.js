@@ -4,10 +4,10 @@ import TransactionsBlock from './TransactionsBlock';
 import StatisticsBlock from './StatisticsBlock';
 import '../../styles/MainContent.css';
 
-function MainContent() {
+function MainContent({friendsList}) {
     return (
         <main className="main-content">
-            <FriendsBlock />
+            <FriendsBlock friendsList={friendsList} />
             <TransactionsBlock />
             <StatisticsBlock />
         </main>

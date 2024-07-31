@@ -1,4 +1,4 @@
-package com.example.demo.models;
+package com.example.demo.models.projections;
 
 import java.math.BigDecimal;
 import java.sql.Timestamp;

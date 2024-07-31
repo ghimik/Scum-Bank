@@ -1,6 +1,6 @@
 package com.example.demo.services;
 
-import com.example.demo.models.TransactionProjection;
+import com.example.demo.models.projections.TransactionProjection;
 import com.example.demo.repos.AccountRepository;
 import com.example.demo.repos.BankAccountRepository;
 import com.example.demo.repos.TransactionRepository;

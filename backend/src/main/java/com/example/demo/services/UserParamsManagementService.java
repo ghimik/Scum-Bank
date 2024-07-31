@@ -1,7 +1,6 @@
 package com.example.demo.services;
 
 import org.springframework.context.annotation.ScopedProxyMode;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.annotation.SessionScope;
 
@@ -9,7 +8,7 @@ import java.util.UUID;
 
 @Service
 @SessionScope(proxyMode = ScopedProxyMode.TARGET_CLASS)
-public class UserParamsManagmentService {
+public class UserParamsManagementService {
 
     private UUID sessionUUID;
 

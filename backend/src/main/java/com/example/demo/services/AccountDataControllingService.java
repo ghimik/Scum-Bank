@@ -1,7 +1,6 @@
 package com.example.demo.services;
 
-import com.example.demo.models.Transaction;
-import com.example.demo.models.TransactionProjection;
+import com.example.demo.models.projections.TransactionProjection;
 
 import java.math.BigDecimal;
 import java.util.List;

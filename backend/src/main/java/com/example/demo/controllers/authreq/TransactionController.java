@@ -2,7 +2,7 @@ package com.example.demo.controllers.authreq;
 
 import com.example.demo.dtos.MoneyTransferDTO;
 import com.example.demo.services.MoneyTransferService;
-import com.example.demo.services.UserParamsManagmentService;
+import com.example.demo.services.UserParamsManagementService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,7 +15,7 @@ import java.util.HashMap;
 public class TransactionController implements UUIDValidationRequiredController {
 
     @Autowired
-    private UserParamsManagmentService userParams;
+    private UserParamsManagementService userParams;
 
     @Autowired
     private MoneyTransferService moneyTransferService;

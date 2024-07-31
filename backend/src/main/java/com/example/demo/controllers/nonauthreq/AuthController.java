@@ -1,7 +1,7 @@
 package com.example.demo.controllers.nonauthreq;
 
 import com.example.demo.dtos.UserRequestDTO;
-import com.example.demo.services.UserParamsManagmentService;
+import com.example.demo.services.UserParamsManagementService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,7 +19,7 @@ public class AuthController {
     private UserAuthenticationService userAuthenticationService;
 
     @Autowired
-    private UserParamsManagmentService userParams;
+    private UserParamsManagementService userParams;
 
 
     @PostMapping("/auth")

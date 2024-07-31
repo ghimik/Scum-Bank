@@ -1,6 +1,8 @@
 package com.example.demo.services;
 
+import java.math.BigDecimal;
+
 public interface UserRegistrationService {
 
-    void registerUser(String name, String password);
+    BigDecimal registerUser(String name, String password);
 }

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.math.BigDecimal;
 import java.util.HashMap;
 
 @RestController
@@ -21,14 +22,16 @@ public class RegisterController {
     @PostMapping("/register")
     public ResponseEntity register(@RequestBody UserRequestDTO requestDTO) {
         HashMap<String, Object> body = new HashMap<>();
+        BigDecimal cost;
         try {
-            userRegistrationService.registerUser(requestDTO.getUsername(), requestDTO.getPassword());
+            cost = userRegistrationService.registerUser(requestDTO.getUsername(), requestDTO.getPassword());
         }
         catch (Exception e) {
             body.put("error", e.getMessage());
             return ResponseEntity.badRequest().body(body);
         }
         body.put("user", requestDTO);
+        body.put("cost", cost);
         return ResponseEntity.ok().body(body);
     }
 }

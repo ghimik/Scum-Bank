@@ -12,7 +12,7 @@ import java.math.BigDecimal;
 public interface BankAccountRepository extends JpaRepository<BankAccount, Long> {
 
     @Query(value = "SELECT bacc.id, bacc.balance FROM BankAccount bacc " +
-            "INNER JOIN account acc ON (acc.id = bacc.id) " +
+            "INNER JOIN account acc ON (acc.bankaccountid = bacc.id) " +
             "WHERE acc.id = ?1", nativeQuery = true)
     BankAccount findByMainAccountId(Long id);
 

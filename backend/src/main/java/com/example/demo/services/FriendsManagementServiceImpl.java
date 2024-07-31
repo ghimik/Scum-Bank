@@ -48,6 +48,21 @@ public class FriendsManagementServiceImpl implements FriendsManagementService {
                 accountRepository.findByUsername(receiverName));
     }
 
+    @Override
+    public Boolean areFriends(Long first, Long second) {
+        return  friendPairRepository.findByFirstAndSecond(
+                    accountRepository.findById(first).orElseThrow(),
+                    accountRepository.findById(second).orElseThrow())
+                .isPresent();
+    }
+
+    @Override
+    public Boolean areFriends(Account first, Account second) {
+        return friendPairRepository
+                .findByFirstAndSecond(first, second)
+                .isPresent();
+    }
+
     private void saveFriendPair(Account first, Account second) {
         FriendsPair friendsPair = new FriendsPair();
         friendsPair.setFirst(first);

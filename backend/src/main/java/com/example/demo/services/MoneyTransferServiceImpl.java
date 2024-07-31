@@ -21,6 +21,8 @@ import java.time.Instant;
 @Service
 public class MoneyTransferServiceImpl implements MoneyTransferService{
 
+    public final BigDecimal FRIENDS_MONEY_TRANSFER_COMISSION = BigDecimal.valueOf(0.1D);
+
     @Autowired
     private AccountRepository accountRepository;
 
@@ -29,6 +31,9 @@ public class MoneyTransferServiceImpl implements MoneyTransferService{
 
     @Autowired
     private BankAccountRepository bankAccountRepository;
+
+    @Autowired
+    private FriendsManagementService friendsManagementService;
 
     @Override
     @Transactional
@@ -49,6 +54,9 @@ public class MoneyTransferServiceImpl implements MoneyTransferService{
 
         Account receiverAccount = accountRepository.findByUsername(receiverName);
         BankAccount reciever = receiverAccount.getBankAccount();
+        
+        if (friendsManagementService.areFriends(senderAccount, receiverAccount))
+            scaled = scaled.multiply(BigDecimal.ONE.subtract(FRIENDS_MONEY_TRANSFER_COMISSION));
 
         Transaction transaction = new Transaction();
         transaction.setValue(scaled);

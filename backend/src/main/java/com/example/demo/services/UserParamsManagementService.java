@@ -1,5 +1,6 @@
 package com.example.demo.services;
 
+import com.example.demo.models.UserRole;
 import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.annotation.SessionScope;
@@ -13,6 +14,8 @@ public class UserParamsManagementService {
     private UUID sessionUUID;
 
     private Long userid;
+
+    private UserRole userRole;
 
     public Boolean isValidUUID(UUID other) {
         return this.sessionUUID != null && sessionUUID.equals(other);
@@ -49,5 +52,11 @@ public class UserParamsManagementService {
         this.userid = userid;
     }
 
+    public UserRole getUserRole() {
+        return userRole;
+    }
 
+    public void setUserRole(UserRole userRole) {
+        this.userRole = userRole;
+    }
 }

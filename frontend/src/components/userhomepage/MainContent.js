@@ -3,6 +3,7 @@ import FriendsBlock from './FriendsBlock';
 import TransactionsBlock from './TransactionsBlock';
 import StatisticsBlock from './StatisticsBlock';
 import '../../styles/MainContent.css';
+import CastMoneyButton from './CastMoneyButton';
 
 function MainContent({friendsList}) {
     return (

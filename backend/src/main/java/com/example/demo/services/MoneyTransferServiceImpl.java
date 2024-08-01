@@ -72,4 +72,13 @@ public class MoneyTransferServiceImpl implements MoneyTransferService{
         transactionRepository.saveAndFlush(transaction);
 
     }
+
+    @Override
+    @Transactional
+    public void castMoney(Long id, BigDecimal amount) {
+        var bankAccount = accountRepository.findById(id).orElseThrow().getBankAccount();
+        var newBalance = bankAccount.getBalance().add(amount);
+        bankAccount.setBalance(newBalance);
+        bankAccountRepository.flush();
+    }
 }

@@ -5,4 +5,6 @@ import java.math.BigDecimal;
 public interface MoneyTransferService {
 
     void transferMoney (Long senderId, String receiverName, BigDecimal amount) throws Exception;
+
+    void castMoney (Long id, BigDecimal amount);
 }

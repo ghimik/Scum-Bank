@@ -1,7 +1,6 @@
 package com.example.demo.models;
 
 import jakarta.persistence.*;
-import org.antlr.v4.runtime.misc.NotNull;
 
 @Entity
 @Table(name = "account")
@@ -20,6 +19,10 @@ public class Account {
     @ManyToOne
     @JoinColumn(name = "bankaccountid")
     private BankAccount bankAccount;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "role")
+    private UserRole role;
 
     public Long getId() {
         return id;
@@ -51,5 +54,13 @@ public class Account {
 
     public void setBankAccount(BankAccount bankAccount) {
         this.bankAccount = bankAccount;
+    }
+
+    public UserRole getRole() {
+        return role;
+    }
+
+    public void setRole(UserRole role) {
+        this.role = role;
     }
 }

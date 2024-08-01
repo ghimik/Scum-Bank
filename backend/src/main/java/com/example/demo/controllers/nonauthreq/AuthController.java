@@ -35,7 +35,7 @@ public class AuthController {
             var uuid = UUID.randomUUID();
 
             userParams.setSessionUUID(uuid);
-
+            userParams.setUserRole(account.getRole());
             userParams.setUserid(account.getId());
             body.put("authorized", "true");
             body.put("sessionUUID", uuid.toString());

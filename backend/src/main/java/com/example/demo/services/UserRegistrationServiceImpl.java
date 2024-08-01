@@ -2,6 +2,7 @@ package com.example.demo.services;
 
 import com.example.demo.models.Account;
 import com.example.demo.models.BankAccount;
+import com.example.demo.models.UserRole;
 import com.example.demo.repos.AccountRepository;
 import com.example.demo.repos.BankAccountRepository;
 import jakarta.transaction.Transactional;
@@ -33,6 +34,7 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
         newAccount.setUsername(name);
         newAccount.setPassword(password);
         newAccount.setBankAccount(bankAccount);
+        newAccount.setRole(null);
 
         accountRepository.save(newAccount);
 

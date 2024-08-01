@@ -7,6 +7,7 @@ import {setUsername } from "../../store/actions/setUsername"
 import {setBalance} from "../../store/actions/setBalance"
 import axios from 'axios';
 import AddFriendModal from '../AddFriendModal';
+import CastMoneyButton from './CastMoneyButton';
 
 function refreshBalance(uuid, dispatch) {
     const url = `http://localhost:8081/api/balance`;
@@ -66,6 +67,7 @@ function UserSidebar({onFriendAdded}) {
                 />
             </div>
             <AddFriendModal onFriendAdded={onFriendAdded} isOpen={isAddFriendModalOpen} onClose={closeAddFriendModal} />
+            <CastMoneyButton />
 
             <LogoutButton/>
             

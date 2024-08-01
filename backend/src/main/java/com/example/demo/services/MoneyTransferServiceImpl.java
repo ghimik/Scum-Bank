@@ -55,8 +55,6 @@ public class MoneyTransferServiceImpl implements MoneyTransferService{
         Account receiverAccount = accountRepository.findByUsername(receiverName);
         BankAccount reciever = receiverAccount.getBankAccount();
 
-        if (friendsManagementService.areFriends(senderAccount, receiverAccount))
-            scaled = scaled.multiply(BigDecimal.ONE.subtract(FRIENDS_MONEY_TRANSFER_COMISSION));
 
         Transaction transaction = new Transaction();
         transaction.setValue(scaled);
@@ -64,8 +62,12 @@ public class MoneyTransferServiceImpl implements MoneyTransferService{
         transaction.setSender(senderAccount);
         transaction.setTimestamp(Timestamp.from(Instant.now()));
 
-        bankAccountRepository.addMoney(reciever.getId(), scaled);
+
         bankAccountRepository.annigilateMoney(sender.getId(), scaled);
+        if (friendsManagementService.areFriends(senderAccount, receiverAccount))
+            scaled = scaled.multiply(BigDecimal.ONE.subtract(FRIENDS_MONEY_TRANSFER_COMISSION));
+
+        bankAccountRepository.addMoney(reciever.getId(), scaled);
 
         transactionRepository.saveAndFlush(transaction);
 

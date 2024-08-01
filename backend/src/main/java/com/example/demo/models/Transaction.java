@@ -19,8 +19,8 @@ public class Transaction {
     private Account sender;
 
     @ManyToOne
-    @JoinColumn(name = "recieverid")
-    private Account reciever;
+    @JoinColumn(name = "receiverid")
+    private Account receiver;
 
     @Column(name = "value")
     private BigDecimal value;
@@ -45,11 +45,11 @@ public class Transaction {
     }
 
     public Account getReciever() {
-        return reciever;
+        return receiver;
     }
 
-    public void setReciever(Account reciever) {
-        this.reciever = reciever;
+    public void setReciever(Account receiver) {
+        this.receiver = receiver;
     }
 
     public Timestamp getTimestamp() {

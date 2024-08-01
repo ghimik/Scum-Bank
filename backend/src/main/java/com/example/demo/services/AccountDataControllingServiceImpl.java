@@ -1,5 +1,6 @@
 package com.example.demo.services;
 
+import com.example.demo.models.Transaction;
 import com.example.demo.models.projections.TransactionProjection;
 import com.example.demo.repos.AccountRepository;
 import com.example.demo.repos.BankAccountRepository;
@@ -39,12 +40,14 @@ public class AccountDataControllingServiceImpl implements AccountDataControlling
 
     @Override
     public List<TransactionProjection> getTransactionsList(Long id) {
-        return transactionRepository.findAllBySenderId(id).stream().map((transaction -> {
-            var proj = new TransactionProjection();
-            proj.setDate(transaction.getTimestamp());
-            proj.setAmount(transaction.getValue());
-            proj.setReceiverName(accountRepository.findById(id).orElseThrow().getUsername());
-            return proj;
-        })).toList();
+        var myName = accountRepository.findById(id).orElseThrow().getUsername();
+        return  transactionRepository
+                .findAllByReceiverIdOrSenderId(id, id)
+                .stream()
+                .map(TransactionProjection::from)
+                .peek(transactionProjection -> transactionProjection.replaceMyName(myName))
+                .toList();
+
+
     }
 }

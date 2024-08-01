@@ -8,6 +8,48 @@
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.transactions-block * {
-    min-width: 80%;
+
+.transactions-block h3 {
+    margin-bottom: 15px;
+    font-size: 1.5rem;
+    color: #333;
+}
+
+.transaction-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.transaction-list li {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid #ccc;
+}
+
+.transaction-list li:last-child {
+    border-bottom: none;
+}
+
+.transaction-list span {
+    font-size: 1rem;
+    color: #555;
+}
+
+.show-all-button {
+    margin-top: 10px;
+    padding: 10px 20px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #007bff;
+    color: white;
+    transition: background-color 0.3s;
+    width: 100%;
+}
+
+.show-all-button:hover {
+    background-color: #0056b3;
 }

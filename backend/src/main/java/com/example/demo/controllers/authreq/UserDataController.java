@@ -1,10 +1,12 @@
 package com.example.demo.controllers.authreq;
 
 import com.example.demo.dtos.GeneralUserInformationDTO;
+import com.example.demo.dtos.StatisticsDTO;
 import com.example.demo.models.projections.AccountProjection;
 import com.example.demo.models.projections.TransactionProjection;
 import com.example.demo.services.AccountDataControllingService;
 import com.example.demo.services.FriendsManagementService;
+import com.example.demo.services.StatisticsService;
 import com.example.demo.services.UserParamsManagementService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -27,6 +29,9 @@ public class UserDataController implements UUIDValidationRequiredController {
 
     @Autowired
     private FriendsManagementService friendsManagementService;
+
+    @Autowired
+    private StatisticsService statisticsService;
 
     @GetMapping("/generalinfo")
     public ResponseEntity<GeneralUserInformationDTO> getGeneralInfo(@RequestParam String sessionUUID) {
@@ -83,6 +88,13 @@ public class UserDataController implements UUIDValidationRequiredController {
         validateUUID(userParams,sessionUUID);
         var id = userParams.getUserid();
         return ResponseEntity.ok(friendsManagementService.getAllFriends(id));
+    }
+
+    @GetMapping("/stats")
+    public ResponseEntity<StatisticsDTO> stats(@RequestParam String sessionUUID) {
+        validateUUID(userParams, sessionUUID);
+        var id = userParams.getUserid();
+        return ResponseEntity.ok(statisticsService.getMonthlyStatistics(id));
     }
 
 

@@ -15,7 +15,7 @@ public class UserParamsManagementService {
 
     private Long userid;
 
-    private UserRole userRole;
+    private String userRole;
 
     public Boolean isValidUUID(UUID other) {
         return this.sessionUUID != null && sessionUUID.equals(other);
@@ -52,11 +52,11 @@ public class UserParamsManagementService {
         this.userid = userid;
     }
 
-    public UserRole getUserRole() {
+    public String getUserRole() {
         return userRole;
     }
 
-    public void setUserRole(UserRole userRole) {
+    public void setUserRole(String userRole) {
         this.userRole = userRole;
     }
 }

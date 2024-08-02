@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import '../../styles/StatisticsBlock.css';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
@@ -11,7 +11,7 @@ function StatisticsBlock() {
         count: null
     });
 
-    const fetchTransactions = () => {
+    const fetchTransactions = useCallback(() => {
         axios.get('http://localhost:8081/api/stats', {
             params: { sessionUUID: uuid },
             withCredentials: true
@@ -22,11 +22,11 @@ function StatisticsBlock() {
         .catch(error => {
             console.error('Error fetching transactions:', error);
         });
-    };
+    }, [uuid]);
 
     useEffect(() => {
         fetchTransactions();
-    })
+    }, [fetchTransactions])
 
 
     return (

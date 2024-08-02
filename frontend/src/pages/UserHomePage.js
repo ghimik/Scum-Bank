@@ -21,6 +21,7 @@ function UserHomePage() {
             withCredentials: true
         })
         .then(response => {
+            
             setFriendsList(response.data);
         })
         .catch(error => {

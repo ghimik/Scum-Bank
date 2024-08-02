@@ -17,6 +17,11 @@ const dataReducer = (state = initialState, action) => {
                 ...state, 
                 balance: action.payload
             }
+        case 'SET_AVATAR': 
+            return {
+                ...state,
+                avatar: action.payload
+            }
         case 'SET_EMPTY':
             return initialState;
         default:

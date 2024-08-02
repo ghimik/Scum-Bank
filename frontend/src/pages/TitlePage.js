@@ -11,6 +11,7 @@ function TitlePage() {
     const navigate = useNavigate();
     const authorized = useSelector((state) => state.sessionUUID);
     const username = useSelector((state) => state.username);
+    const avatar = useSelector((state) => state.avatar)
 
     return (
         <div className="title-page-container">
@@ -19,7 +20,7 @@ function TitlePage() {
                 <aside className="sidebar">
                     {authorized ? (
                         <div className="profile-sidebar">
-                            <img className="profile-avatar" src="/path/to/avatar.jpg" alt="User Avatar"/>
+                            <img className="profile-avatar" src={avatar} alt="User Avatar"/>
                             <div className="profile-info">
                                 <h3>{username}</h3>
                                 <button className="profile-button" onClick={() => navigate('/home')}>Go to Home</button>

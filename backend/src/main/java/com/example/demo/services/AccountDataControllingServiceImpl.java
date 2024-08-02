@@ -1,13 +1,14 @@
 package com.example.demo.services;
 
-import com.example.demo.models.Transaction;
 import com.example.demo.models.projections.TransactionProjection;
 import com.example.demo.repos.AccountRepository;
 import com.example.demo.repos.BankAccountRepository;
 import com.example.demo.repos.TransactionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -49,5 +50,17 @@ public class AccountDataControllingServiceImpl implements AccountDataControlling
                 .toList();
 
 
+    }
+
+    @Override
+    public byte[] getAvatar(Long id) {
+        return accountRepository.findById(id).orElseThrow().getAvatar();
+    }
+
+    @Override
+    public void setAvatar(MultipartFile blob, Long id) throws IOException {
+        var account = accountRepository.findById(id).orElseThrow();
+        account.setAvatar(blob.getBytes());
+        accountRepository.flush();
     }
 }

@@ -4,6 +4,8 @@ public class AccountProjection {
 
     private String username;
 
+    private byte[] avatar;
+
     public String getUsername() {
         return username;
     }
@@ -12,8 +14,18 @@ public class AccountProjection {
         this.username = username;
     }
 
-    public AccountProjection(String username) {
+
+    public byte[] getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(byte[] avatar) {
+        this.avatar = avatar;
+    }
+
+    public AccountProjection(String username, byte[] avatar) {
         this.username = username;
+        this.avatar = avatar;
     }
 
     public AccountProjection() {

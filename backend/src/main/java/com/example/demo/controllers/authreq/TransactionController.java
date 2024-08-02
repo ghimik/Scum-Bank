@@ -45,7 +45,7 @@ public class TransactionController implements UUIDValidationRequiredController {
     @PostMapping("/castMoney")
     public ResponseEntity castMoney(@RequestParam String sessionUUID, @RequestParam String amount) {
         validateUUID(userParams, sessionUUID);
-        if (userParams.getUserRole() != UserRole.Sigma)
+        if (!userParams.getUserRole().equals(UserRole.Sigma))
             return ResponseEntity.status(HttpStatus.FORBIDDEN).body("you are not sigma sorry");
 
         var id = userParams.getUserid();

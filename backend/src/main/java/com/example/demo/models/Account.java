@@ -1,6 +1,7 @@
 package com.example.demo.models;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.Type;
 
 @Entity
 @Table(name = "account")
@@ -20,9 +21,11 @@ public class Account {
     @JoinColumn(name = "bankaccountid")
     private BankAccount bankAccount;
 
-    @Enumerated(EnumType.STRING)
     @Column(name = "role")
-    private UserRole role;
+    private String role;
+
+    @Column(name = "ava")
+    private byte[] avatar;
 
     public Long getId() {
         return id;
@@ -56,11 +59,19 @@ public class Account {
         this.bankAccount = bankAccount;
     }
 
-    public UserRole getRole() {
+    public String getRole() {
         return role;
     }
 
-    public void setRole(UserRole role) {
+    public void setRole(String role) {
         this.role = role;
+    }
+
+    public byte[] getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(byte[] avatar) {
+        this.avatar = avatar;
     }
 }

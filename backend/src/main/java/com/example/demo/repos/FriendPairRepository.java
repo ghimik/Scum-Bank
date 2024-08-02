@@ -13,6 +13,9 @@ public interface FriendPairRepository extends JpaRepository<FriendsPair, Long> {
 
     List<FriendsPair> findByFirst(Account first);
 
+    List<FriendsPair> findByFirstOrSecond(Account first, Account second);
+
+
     Optional<FriendsPair> findByFirstAndSecond(Account first, Account second);
 
 }

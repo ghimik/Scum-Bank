@@ -22,14 +22,20 @@ public class FriendsManagementServiceImpl implements FriendsManagementService {
 
     @Override
     public List<AccountProjection> getAllFriends(Long id) {
+        var myacc = accountRepository.findById(id).orElseThrow();
         return friendPairRepository
-                .findByFirst(accountRepository.findById(id).orElseThrow())
+                .findByFirstOrSecond(myacc, myacc)
                 .stream()
                 .map(friendsPair -> {
-                    return accountRepository.findById(friendsPair.getSecond().getId());
+                    var first = accountRepository.findById(friendsPair.getFirst().getId()).orElseThrow();
+                    var second = accountRepository.findById(friendsPair.getSecond().getId()).orElseThrow();
+                    if (first.getId().equals(myacc.getId()))
+                        return second;
+                    else
+                        return first;
                 })
                 .map(account -> {
-                    return new AccountProjection(account.orElseThrow().getUsername());
+                    return new AccountProjection(account.getUsername(), account.getAvatar());
                 })
                 .toList();
     }

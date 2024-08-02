@@ -11,7 +11,7 @@ function FriendsBlock({ friendsList }) {
                 <div className="friends-list">
                     {friendsList.map((friend, index) => (
                         <div key={index} className="friend-card">
-                            <img src="/path/to/default-avatar.jpg" alt="Avatar" className="friend-avatar" />
+                            <img src={friend.avatar} alt="Avatar" className="friend-avatar" />
                             <div className="friend-info">
                                 <h4>{friend.username}</h4>
                             </div>

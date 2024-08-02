@@ -1,7 +1,7 @@
 package com.example.demo.models;
 
-public enum UserRole {
-    Sigma,
-    Botik;
+public final class UserRole {
+    public final static String Sigma = "Sigma";
+    public final static String Botik = "Botik";
 }
 

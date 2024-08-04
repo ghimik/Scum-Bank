@@ -4,16 +4,30 @@ import TransactionsBlock from './TransactionsBlock';
 import StatisticsBlock from './StatisticsBlock';
 import '../../styles/MainContent.css';
 
-function MainContent({friendsList}) {
-    let handledFriendsList = [];
-    friendsList.forEach(element => {
-        console.log(element.avatar)
-        const base64String = btoa(
-            new Uint8Array(element.avatar).reduce((data, byte) => data + String.fromCharCode(byte), '')
-            );
-        console.log(base64String);
-        handledFriendsList.push({username: element.username, avatar: 'data:application/json;base64,' + base64String});
+function MainContent({ friendsList }) {
+    const handledFriendsList = friendsList.map(element => {
+        console.log('Avatar data type:', typeof element.avatar);
+        console.log('Avatar data:', element.avatar);
+
+        let base64String = element.avatar;
+        if (!base64String) {
+            return {
+                username: element.username,
+                avatar: null
+            }
+        }
+
+        if (!base64String.startsWith('data:image')) {
+            const mimeType = 'image/jpeg'; 
+            base64String = `data:${mimeType};base64,${base64String}`;
+        }
+
+        return {
+            username: element.username,
+            avatar: base64String
+        };
     });
+
     return (
         <main className="main-content">
             <FriendsBlock friendsList={handledFriendsList} />

@@ -7,6 +7,8 @@ CREATE TABLE IF NOT EXISTS public.account
     username character varying COLLATE pg_catalog."default" NOT NULL,
     password character varying COLLATE pg_catalog."default" NOT NULL,
     bankaccountid bigint,
+    ava bytea,
+    role character varying COLLATE pg_catalog."default" DEFAULT 'Botik'::character varying,
     CONSTRAINT account_pkey PRIMARY KEY (id),
     CONSTRAINT username UNIQUE (username)
 );
@@ -31,7 +33,7 @@ CREATE TABLE IF NOT EXISTS public.transaction
 (
     id bigserial NOT NULL,
     senderid bigint NOT NULL,
-    recieverid bigint NOT NULL,
+    receiverid bigint NOT NULL,
     value numeric(18, 2) NOT NULL,
     date timestamp with time zone,
     CONSTRAINT transaction_pkey PRIMARY KEY (id)
@@ -60,7 +62,7 @@ ALTER TABLE IF EXISTS public.friendpair
 
 
 ALTER TABLE IF EXISTS public.transaction
-    ADD CONSTRAINT reciever_fk FOREIGN KEY (recieverid)
+    ADD CONSTRAINT reciever_fk FOREIGN KEY (receiverid)
     REFERENCES public.account (id) MATCH SIMPLE
     ON UPDATE CASCADE
     ON DELETE CASCADE;
